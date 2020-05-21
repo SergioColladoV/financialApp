@@ -1,22 +1,20 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
 
 // CONFIGS
-require('./configs/mongoose.config')
-require('./configs/debug.config')
-require('./configs/preprocessor.config')(app)
-require('./configs/locals.config')(app)
-require('./configs/middleware.config')(app)
-require('./configs/passport.config')(app)
-require('./configs/passport')(app)
+require("./configs/mongoose.config");
+require("./configs/debug.config");
+require("./configs/preprocessor.config")(app);
+require("./configs/locals.config")(app);
+require("./configs/middleware.config")(app);
+require("./configs/passport.config")(app);
+require("./configs/passport")(app);
 
 // ROUTES
-const index = require('./routes/index.route');
-app.use('/', index);
-
-const authRoutes = require('./routes/auth.route');
-app.use('/auth', authRoutes);
+app.use("/auth", require("./routes/auth.routes"));
+app.use("/api", require("./routes/incomes.routes"));
+// app.use("/api", require("./routes/expenses.routes"));
 
 // EXPORT
 module.exports = app;
